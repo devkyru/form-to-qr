@@ -4,6 +4,7 @@ import useForm from '../hooks/useForm'
 import {
 	StyledQRContainer
 } from './Form.style'
+import QRCode from 'qrcode.react'
 
 const Form = () => {
 
@@ -23,7 +24,7 @@ const Form = () => {
 		const thisCanvas = document.getElementById("myQR") as HTMLCanvasElement;
 		const pngUrl = thisCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
 
-		let downloadLink = document.createElement("a");
+		let downloadLink = document.getElementById("qrLink") as HTMLAnchorElement;
 		downloadLink.href = pngUrl;
 		downloadLink.download = "myQR.png";
 
@@ -35,8 +36,6 @@ const Form = () => {
 	async function formUserCallback(){
 		downloadQR();
 	}
-
-	var QRCode = require('qrcode.react');
 
 	return (
 		<div>
@@ -80,6 +79,9 @@ const Form = () => {
 					level={"H"}
 					includeMargin={true}
 				/>
+			</StyledQRContainer>
+			<StyledQRContainer>
+				<a id="qrLink" href="/">QRCode</a>
 			</StyledQRContainer>
 		</div>
 	)
